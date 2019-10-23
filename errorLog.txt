@@ -1,0 +1,13 @@
+1、shiro验证登录失败
+
+DEBUG org.apache.shiro.realm.AuthenticatingRealm - Looked up AuthenticationInfo [null] from doGetAuthenticationInfo
+08:14:30.719 [http-nio-8080-exec-9] DEBUG org.apache.shiro.realm.AuthenticatingRealm - No AuthenticationInfo found for submitted AuthenticationToken [org.apache.shiro.authc.UsernamePasswordToken - 尼古拉斯赵四, rememberMe=false].  Returning null.
+08:14:30.721 [http-nio-8080-exec-9] DEBUG org.apache.shiro.web.servlet.SimpleCookie - Added HttpServletResponse Cookie [rememberMe=deleteMe; Path=/tiantianshengxian; Max-Age=0; Expires=Tue, 22-Oct-2019 00:14:30 GMT]
+class org.apache.shiro.authc.UnknownAccountException
+登录时，用户存在，但是shiro找不到响应的用户凭证，然后抛出 UnknownAccountException（未知的用户）登录失败。
+
+傻逼了，服务层返回空。
+
+2、@SessionAttributes(value = {"user"})
+将Model中的user对象放入Session
+
