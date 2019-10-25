@@ -11,3 +11,4 @@ class org.apache.shiro.authc.UnknownAccountException
 2、@SessionAttributes(value = {"user"})
 将Model中的user对象放入Session
 
+ There is no getter for property named 'cart' in 'class com.vainglory.pojo.model.Cart'

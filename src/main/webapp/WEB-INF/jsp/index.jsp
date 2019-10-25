@@ -9,6 +9,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/slide.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/indexPageControl.js"></script>
+
 </head>
 <body>
 <div class="header_con">
@@ -30,7 +32,7 @@
                     <span>|</span>
                     <a href="${pageContext.request.contextPath}/jsp/user_center_info.jsp">用户中心</a>
                     <span>|</span>
-                    <a href="${pageContext.request.contextPath}/jsp/cart.jsp">我的购物车</a>
+                    <a href="${pageContext.request.contextPath}/cartController/show">我的购物车</a>
                     <span>|</span>
                     <a href="${pageContext.request.contextPath}/jsp/user_center_order.jsp">我的订单</a>
                 </div>
@@ -46,7 +48,7 @@
         <input type="button" class="input_btn fr" name="" value="搜索">
     </div>
     <div class="guest_cart fr">
-        <a href="#" class="cart_name fl">我的购物车</a>
+        <a href="${pageContext.request.contextPath}/cartController/show" class="cart_name fl">我的购物车</a>
         <div class="goods_count fl" id="show_count">1</div>
     </div>
 </div>
@@ -65,14 +67,9 @@
 </div>
 
 <div class="center_con clearfix">
-    <ul class="subnav fl">
-        <li><a href="#model01" class="fruit">新鲜水果</a></li>
-        <li><a href="#model02" class="seafood">海鲜水产</a></li>
-        <li><a href="#model03" class="meet">猪牛羊肉</a></li>
-        <li><a href="#model04" class="egg">禽类蛋品</a></li>
-        <li><a href="#model05" class="vegetables">新鲜蔬菜</a></li>
-        <li><a href="#model06" class="ice">速冻食品</a></li>
-    </ul>
+    <div id="category">
+        <%--全部商品分类：jsp/child/all_goods_category.jsp--%>
+    </div>
     <div class="slide fl">
         <ul class="slide_pics">
             <li><img src="${pageContext.request.contextPath}/images/slide.jpg" alt="幻灯片"></li>
@@ -90,81 +87,11 @@
     </div>
 </div>
 
-<div class="list_model">
-    <div class="list_title clearfix">
-        <h3 class="fl" id="model01">新鲜水果</h3>
-        <div class="subtitle fl">
-            <span>|</span>
-            <a href="#">鲜芒</a>
-            <a href="#">加州提子</a>
-            <a href="#">亚马逊牛油果</a>
-        </div>
-        <a href="${pageContext.request.contextPath}/jsp/list.jsp" class="goods_more fr" id="fruit_more">查看更多 ></a>
-    </div>
-
-    <div class="goods_con clearfix">
-        <div class="goods_banner fl"><img src="${pageContext.request.contextPath}/images/banner01.jpg"></div>
-        <ul class="goods_list fl">
-            <li>
-                <h4><a href="#">草莓</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods003.jpg"></a>
-                <div class="prize">¥ 30.00</div>
-            </li>
-            <li>
-                <h4><a href="#">葡萄</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods002.jpg"></a>
-                <div class="prize">¥ 5.50</div>
-            </li>
-            <li>
-                <h4><a href="#">柠檬</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods001.jpg"></a>
-                <div class="prize">¥ 3.90</div>
-            </li>
-            <li>
-                <h4><a href="#">奇异果</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods012.jpg"></a>
-                <div class="prize">¥ 25.80</div>
-            </li>
-        </ul>
-    </div>
+<div id="categoryFruit">
+    <%--新鲜水果模块：category_model.jsp(1)--%>
 </div>
-
-<div class="list_model">
-    <div class="list_title clearfix">
-        <h3 class="fl" id="model02">海鲜水产</h3>
-        <div class="subtitle fl">
-            <span>|</span>
-            <a href="#">河虾</a>
-            <a href="#">扇贝</a>
-        </div>
-        <a href="${pageContext.request.contextPath}/jsp/list.jsp" class="goods_more fr">查看更多 ></a>
-    </div>
-
-    <div class="goods_con clearfix">
-        <div class="goods_banner fl"><img src="${pageContext.request.contextPath}/images/banner02.jpg"></div>
-        <ul class="goods_list fl">
-            <li>
-                <h4><a href="#">青岛野生海捕大青虾</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods018.jpg"></a>
-                <div class="prize">¥ 48.00</div>
-            </li>
-            <li>
-                <h4><a href="#">扇贝</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods019.jpg"></a>
-                <div class="prize">¥ 46.00</div>
-            </li>
-            <li>
-                <h4><a href="#">冷冻秋刀鱼</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods020.jpg"></a>
-                <div class="prize">¥ 19.00</div>
-            </li>
-            <li>
-                <h4><a href="#">基围虾</a></h4>
-                <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods021.jpg"></a>
-                <div class="prize">¥ 25.00</div>
-            </li>
-        </ul>
-    </div>
+<div id="categorySeafood">
+    <%--海鲜水产模块：category_model.jsp(2)--%>
 </div>
 
 <div class="list_model">

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vainglory.dao.CartDao">
+    <resultMap id="cartVoMap" type="CartVo">
+        <id property="cart.id" column="cid"/>
+        <result property="cart.goodsNum" column="goods_num"/>
+        <result property="cart.goodsId" column="gid"/>
+
+        <result property="goodsAndPicture.goods.id" column="gid"/>
+        <result property="goodsAndPicture.goods.name" column="name"/>
+        <result property="goodsAndPicture.goods.price" column="price"/>
+        <result property="goodsAndPicture.goods.unit" column="unit"/>
+
+        <result property="goodsAndPicture.picture.pathName" column="path_name"/>
+
+    </resultMap>
+    <select id="findByUser" resultMap="cartVoMap">
+        <include refid="selectCart"/>
+        where user_id = #{userId}
+    </select>
+    <select id="findByUserAndGoods" resultType="Cart">
+        select id,goods_id,goods_num,user_id from tb_cart where goods_id=#{goodsId} and user_id=#{userId}
+    </select>
+    <update id="updateGoodsNum" parameterType="Cart">
+        update tb_cart set goods_num = #{goodsNum} where goods_id=#{goodsId} and user_id=#{userId}
+    </update>
+
+    <insert id="add" parameterType="Cart">
+        <include refid="insertCart"/>
+        values(#{goodsId},#{goodsNum},#{gmt_create},#{userId})
+    </insert>
+
+    <sql id="selectCart">
+        select tb_cart.id as cid,goods_num,tb_goods.id as gid,name,price,unit,path_name
+        from tb_cart
+        join tb_goods
+        on tb_cart.goods_id=tb_goods.id
+        JOIN tb_pic
+        on tb_goods.id=tb_pic.goods_id
+    </sql>
+
+    <sql id="insertCart">
+        insert into tb_cart(goods_id,goods_num,gmt_create,user_id)
+    </sql>
+
+</mapper>

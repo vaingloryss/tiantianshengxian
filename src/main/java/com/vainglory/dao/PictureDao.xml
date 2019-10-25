@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vainglory.dao.PictureDao">
+    <select id="findById" resultType="picture">
+        <include refid="selectPicture"/>
+        where id=#{picId}
+    </select>
+
+    <select id="findByGoodsId" resultType="picture">
+        <include refid="selectPicture"/>
+        where goods_id=#{goodsId}
+    </select>
+
+    <sql id="selectPicture">
+        SELECT id,goods_id,path,name FROM tb_pic
+    </sql>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vainglory.dao.GoodsDao">
+
+    <resultMap type="com.vainglory.pojo.vo.GoodsAndPicture" id="goodsAndPictureMap" autoMapping="true">
+        <id  property="goods.id" column="gid"/>
+        <result property="goods.name" column="name"/>
+        <result property="goods.price" column="price"/>
+        <result property="goods.unit" column="unit"/>
+        <result property="goods.introduction" column="introduction"/>
+        <result property="goods.detailInfo" column="detail_info"/>
+
+        <result property="picture.pathName" column="path_name"/>
+    </resultMap>
+
+    <select id="findGoodsAndPicByCategoryId" resultMap="goodsAndPictureMap">
+        <include refid="selectGoodsAndPic"/>
+        where tb_goods.category=#{categoryId};
+    </select>
+
+    <select id="findGoodsAndPicByGoodsId" resultMap="goodsAndPictureMap">
+        <include refid="selectGoodsAndPic"/>
+        where tb_goods.id=#{goodsId};
+    </select>
+    
+    <sql id="selectGoods">
+        SELECT id,name,price,unit,category,introduction,detail_info FROM tb_goods
+    </sql>
+    <sql id="selectGoodsAndPic">
+        select tb_goods.id as gid,name,price,unit,introduction,detail_info,path_name
+        from tb_goods
+        join tb_pic
+        on tb_goods.id=tb_pic.goods_id
+    </sql>
+</mapper>

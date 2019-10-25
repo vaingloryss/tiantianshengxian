@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vainglory.dao.CategoryModelDao">
+
+    <resultMap type="com.vainglory.pojo.vo.CategoryModelAndPicture" id="categoryModelAndPictureMap" autoMapping="true">
+        <id  property="categoryModel.id" column="cmid"/>
+        <result property="categoryModel.modelTitle" column="model_title"/>
+        <result property="categoryModel.childCategory" column="child_category"/>
+
+        <result property="picture.pathName" column="path_name"/>
+    </resultMap>
+
+    <select id="findCategoryModelAndPicture" resultMap="categoryModelAndPictureMap">
+        <include refid="selectCategoryModelAndPic"/>
+        where tb_category_model.id = #{categoryId};
+    </select>
+
+    <sql id="selectCategoryModelAndPic">
+        select tb_category_model.id as cmid,model_title,child_category,path_name
+        from tb_category_model
+        join tb_pic
+        on tb_category_model.model_cover=tb_pic.id
+    </sql>
+</mapper>

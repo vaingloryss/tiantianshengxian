@@ -1,6 +1,7 @@
 package com.vainglory.service;
 
 import com.vainglory.pojo.model.Category;
+import com.vainglory.pojo.vo.GoodsAndCategoryModel;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ import java.util.List;
  */
 public interface PageService {
     List<Category> indexCategoryList();
+    GoodsAndCategoryModel getGoodsAndCategoryModel(Integer categoryId);
 }

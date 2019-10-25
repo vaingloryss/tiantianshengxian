@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -11,22 +12,26 @@
     <div class="header">
         <div class="welcome fl">欢迎来到天天生鲜!</div>
         <div class="fr">
-            <div class="login_info fl">
-                欢迎您：<em>张 山</em>
-            </div>
-            <div class="login_btn fl">
-                <a href="${pageContext.request.contextPath}/jsp/login.jsp">登录</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/register.jsp">注册</a>
-            </div>
-            <div class="user_link fl">
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/user_center_info.jsp">用户中心</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/cart.jsp">我的购物车</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/user_center_order.jsp">我的订单</a>
-            </div>
+            <shiro:notAuthenticated>
+                <div class="login_btn fl">
+                    <a href="${pageContext.request.contextPath}/pageController/toLogin">登录</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/pageController/toRegister">注册</a>
+                </div>
+            </shiro:notAuthenticated>
+            <shiro:user>
+                <div class="login_info fl">
+                    欢迎您：<em><shiro:principal/></em>
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/jsp/user_center_info.jsp">用户中心</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/cartController/show">我的购物车</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/jsp/user_center_order.jsp">我的订单</a>
+                </div>
+            </shiro:user>
         </div>
     </div>
 </div>

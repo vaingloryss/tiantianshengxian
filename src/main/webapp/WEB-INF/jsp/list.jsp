@@ -1,44 +1,53 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>天天生鲜-商品列表</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/listPageControl.js"></script>
+
 </head>
 <body>
 <div class="header_con">
     <div class="header">
         <div class="welcome fl">欢迎来到天天生鲜!</div>
         <div class="fr">
-            <div class="login_info fl">
-                欢迎您：<em>张 山</em>
-            </div>
-            <div class="login_btn fl">
-                <a href="${pageContext.request.contextPath}/jsp/login.jsp">登录</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/register.jsp">注册</a>
-            </div>
-            <div class="user_link fl">
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/user_center_info.jsp">用户中心</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/cart.jsp">我的购物车</a>
-                <span>|</span>
-                <a href="${pageContext.request.contextPath}/jsp/user_center_order.jsp">我的订单</a>
-            </div>
+            <shiro:notAuthenticated>
+                <div class="login_btn fl">
+                    <a href="${pageContext.request.contextPath}/pageController/toLogin">登录</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/pageController/toRegister">注册</a>
+                </div>
+            </shiro:notAuthenticated>
+            <shiro:user>
+                <div class="login_info fl">
+                    欢迎您：<em><shiro:principal/></em>
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/jsp/user_center_info.jsp">用户中心</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/cartController/show">我的购物车</a>
+                    <span>|</span>
+                    <a href="${pageContext.request.contextPath}/jsp/user_center_order.jsp">我的订单</a>
+                </div>
+            </shiro:user>
         </div>
     </div>
 </div>
 
 <div class="search_bar clearfix">
-    <a href="${pageContext.request.contextPath}/jsp/index.jsp" class="logo fl"><img src="${pageContext.request.contextPath}/images/logo.png"></a>
+    <a href="${pageContext.request.contextPath}/pageController/toIndex" class="logo fl"><img src="${pageContext.request.contextPath}/images/logo.png"></a>
     <div class="search_con fl">
         <input type="text" class="input_text fl" name="" placeholder="搜索商品">
         <input type="button" class="input_btn fr" name="" value="搜索">
     </div>
     <div class="guest_cart fr">
-        <a href="#" class="cart_name fl">我的购物车</a>
+        <a href="${pageContext.request.contextPath}/cartController/show" class="cart_name fl">我的购物车</a>
         <div class="goods_count fl">1</div>
     </div>
 </div>
@@ -91,15 +100,18 @@
             </ul>
         </div>
     </div>
+   <div class="r_wrap fr clearfix">
+       <div class="sort_bar">
+           <a class="orderBy" id="sortBy1" href="#" onclick="sortBy(1)">默认</a>
+           <a class="orderBy" id="sortBy2" href="#" onclick="sortBy(2)">价格</a>
+           <a class="orderBy" href="#">人气</a>
+       </div>
 
-    <div class="r_wrap fr clearfix">
-        <div class="sort_bar">
-            <a href="#" class="active">默认</a>
-            <a href="#">价格</a>
-            <a href="#">人气</a>
+        <div id="moreGoods">
+           <%--更多商品：jsp/child/more_goods.jsp(1)--%>
         </div>
 
-        <ul class="goods_type_list clearfix">
+         <%--<ul class="goods_type_list clearfix">
             <li>
                 <a href="${pageContext.request.contextPath}/jsp/detail.jsp"><img src="${pageContext.request.contextPath}/images/goods/goods003.jpg"></a>
                 <h4><a href="${pageContext.request.contextPath}/jsp/detail.jsp">大兴大棚草莓</a></h4>
@@ -245,7 +257,7 @@
             <a href="#">4</a>
             <a href="#">5</a>
             <a href="#">下一页></a>
-        </div>
+        </div>--%>
     </div>
 </div>
 

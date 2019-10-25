@@ -3,6 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--为所有POJO类定义别名-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
     <typeAliases>
         <package name="com.vainglory.pojo"/>
     </typeAliases>
